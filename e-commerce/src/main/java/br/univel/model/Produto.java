@@ -9,6 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Column;
 import javax.persistence.Version;
 import java.lang.Override;
+import javax.persistence.OneToOne;
+import br.univel.model.Marca;
+import javax.persistence.ManyToOne;
 
 @Entity
 @Table(name = "Produto")
@@ -22,6 +25,18 @@ public class Produto implements Serializable
    @Version
    @Column(name = "version")
    private int version;
+
+   @OneToOne(mappedBy = "produto")
+   private categoriaProduto categoriaProduto;
+
+   @ManyToOne
+   private Marca marca;
+
+   @Column(nullable = false)
+   private String nome;
+
+   @Column(nullable = false)
+   private String descricao;
 
    public Long getId()
    {
@@ -41,15 +56,6 @@ public class Produto implements Serializable
    public void setVersion(final int version)
    {
       this.version = version;
-   }
-
-   @Override
-   public String toString()
-   {
-      String result = getClass().getSimpleName() + " ";
-      if (id != null)
-         result += "id: " + id;
-      return result;
    }
 
    @Override
@@ -80,6 +86,57 @@ public class Produto implements Serializable
       final int prime = 31;
       int result = 1;
       result = prime * result + ((id == null) ? 0 : id.hashCode());
+      return result;
+   }
+
+   public categoriaProduto getCategoriaProduto()
+   {
+      return categoriaProduto;
+   }
+
+   public void setCategoriaProduto(categoriaProduto categoriaProduto)
+   {
+      this.categoriaProduto = categoriaProduto;
+   }
+
+   public Marca getMarca()
+   {
+      return this.marca;
+   }
+
+   public void setMarca(final Marca marca)
+   {
+      this.marca = marca;
+   }
+
+   public String getNome()
+   {
+      return nome;
+   }
+
+   public void setNome(String nome)
+   {
+      this.nome = nome;
+   }
+
+   public String getDescricao()
+   {
+      return descricao;
+   }
+
+   public void setDescricao(String descricao)
+   {
+      this.descricao = descricao;
+   }
+
+   @Override
+   public String toString()
+   {
+      String result = getClass().getSimpleName() + " ";
+      if (nome != null && !nome.trim().isEmpty())
+         result += "nome: " + nome;
+      if (descricao != null && !descricao.trim().isEmpty())
+         result += ", descricao: " + descricao;
       return result;
    }
 }
