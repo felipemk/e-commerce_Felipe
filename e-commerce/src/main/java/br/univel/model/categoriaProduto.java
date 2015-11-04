@@ -9,10 +9,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Column;
 import javax.persistence.Version;
 import java.lang.Override;
+import br.univel.model.Produto;
+import javax.persistence.OneToOne;
+import javax.persistence.FetchType;
+import javax.persistence.CascadeType;
 
 @Entity
 @Table(name = "categoriaproduto")
-public class CategoriaProduto implements Serializable
+public class categoriaProduto implements Serializable
 {
 
    @Id
@@ -22,6 +26,12 @@ public class CategoriaProduto implements Serializable
    @Version
    @Column(name = "version")
    private int version;
+
+   @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+   private Produto produto;
+
+   @Column(nullable = false)
+   private String nome;
 
    public Long getId()
    {
@@ -44,26 +54,17 @@ public class CategoriaProduto implements Serializable
    }
 
    @Override
-   public String toString()
-   {
-      String result = getClass().getSimpleName() + " ";
-      if (id != null)
-         result += "id: " + id;
-      return result;
-   }
-
-   @Override
    public boolean equals(Object obj)
    {
       if (this == obj)
       {
          return true;
       }
-      if (!(obj instanceof CategoriaProduto))
+      if (!(obj instanceof categoriaProduto))
       {
          return false;
       }
-      CategoriaProduto other = (CategoriaProduto) obj;
+      categoriaProduto other = (categoriaProduto) obj;
       if (id != null)
       {
          if (!id.equals(other.id))
@@ -80,6 +81,35 @@ public class CategoriaProduto implements Serializable
       final int prime = 31;
       int result = 1;
       result = prime * result + ((id == null) ? 0 : id.hashCode());
+      return result;
+   }
+
+   public Produto getProduto()
+   {
+      return produto;
+   }
+
+   public void setProduto(Produto produto)
+   {
+      this.produto = produto;
+   }
+
+   public String getNome()
+   {
+      return nome;
+   }
+
+   public void setNome(String nome)
+   {
+      this.nome = nome;
+   }
+
+   @Override
+   public String toString()
+   {
+      String result = getClass().getSimpleName() + " ";
+      if (nome != null && !nome.trim().isEmpty())
+         result += "nome: " + nome;
       return result;
    }
 }
