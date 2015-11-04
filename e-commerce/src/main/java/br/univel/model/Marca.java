@@ -9,6 +9,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Column;
 import javax.persistence.Version;
 import java.lang.Override;
+import br.univel.model.Produto;
+import java.util.Set;
+import java.util.HashSet;
+import javax.persistence.OneToMany;
+import javax.persistence.CascadeType;
 
 @Entity
 @Table(name = "marca")
@@ -23,8 +28,11 @@ public class Marca implements Serializable
    @Column(name = "version")
    private int version;
 
-   @Column(name = "nome", nullable = false)
+   @Column(nullable = false)
    private String nome;
+
+   @OneToMany(mappedBy = "marca", cascade = CascadeType.ALL, orphanRemoval = true)
+   private Set<Produto> produto = new HashSet<Produto>();
 
    public Long getId()
    {
@@ -94,5 +102,15 @@ public class Marca implements Serializable
       if (nome != null && !nome.trim().isEmpty())
          result += "nome: " + nome;
       return result;
+   }
+
+   public Set<Produto> getProduto()
+   {
+      return this.produto;
+   }
+
+   public void setProduto(final Set<Produto> produto)
+   {
+      this.produto = produto;
    }
 }
