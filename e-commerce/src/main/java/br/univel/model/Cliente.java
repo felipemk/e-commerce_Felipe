@@ -32,6 +32,9 @@ public class Cliente implements Serializable
    @Column(nullable = false)
    private String senha;
 
+   @Column(name = "datanascimento")
+   private String DataNascimento;
+
    public Long getId()
    {
       return this.id;
@@ -113,6 +116,16 @@ public class Cliente implements Serializable
       this.senha = senha;
    }
 
+   public String getDataNascimento()
+   {
+      return DataNascimento;
+   }
+
+   public void setDataNascimento(String DataNascimento)
+   {
+      this.DataNascimento = DataNascimento;
+   }
+
    @Override
    public String toString()
    {
@@ -123,6 +136,8 @@ public class Cliente implements Serializable
          result += ", login: " + login;
       if (senha != null && !senha.trim().isEmpty())
          result += ", senha: " + senha;
+      if (DataNascimento != null && !DataNascimento.trim().isEmpty())
+         result += ", DataNascimento: " + DataNascimento;
       return result;
    }
 }
