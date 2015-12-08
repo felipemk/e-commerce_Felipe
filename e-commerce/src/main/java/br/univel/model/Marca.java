@@ -14,9 +14,11 @@ import java.util.Set;
 import java.util.HashSet;
 import javax.persistence.OneToMany;
 import javax.persistence.CascadeType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @Table(name = "marca")
+@XmlRootElement
 public class Marca implements Serializable
 {
 

@@ -13,9 +13,11 @@ import br.univel.model.Produto;
 import javax.persistence.OneToOne;
 import javax.persistence.FetchType;
 import javax.persistence.CascadeType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @Table(name = "categoriaproduto")
+@XmlRootElement
 public class categoriaProduto implements Serializable
 {
 

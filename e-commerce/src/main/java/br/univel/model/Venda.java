@@ -1,17 +1,23 @@
 package br.univel.model;
 
 import javax.persistence.Entity;
+
 import java.io.Serializable;
+
 import javax.persistence.Table;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Column;
 import javax.persistence.Version;
+
 import java.lang.Override;
+
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @Table(name = "venda")
+@XmlRootElement
 public class Venda implements Serializable
 {
 
@@ -81,5 +87,10 @@ public class Venda implements Serializable
       int result = 1;
       result = prime * result + ((id == null) ? 0 : id.hashCode());
       return result;
+   }
+
+   public void setProduto(Object produto) {
+	   // TODO Auto-generated method stub
+	
    }
 }

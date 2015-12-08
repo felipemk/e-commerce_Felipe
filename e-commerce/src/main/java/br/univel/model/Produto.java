@@ -12,9 +12,11 @@ import java.lang.Override;
 import javax.persistence.OneToOne;
 import br.univel.model.Marca;
 import javax.persistence.ManyToOne;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @Table(name = "Produto")
+@XmlRootElement
 public class Produto implements Serializable
 {
 
