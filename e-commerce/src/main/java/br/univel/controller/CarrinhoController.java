@@ -33,6 +33,16 @@ public class CarrinhoController {
 				
 		produtos.put(produto.getId(), pp);
 	}
+	
+	
+	public void removeProduto(Long id) {
+		produtos.remove(id);
+	}
+	
+	public void limpaCarrinho() {
+		produtos = new HashMap<Long, ProdutoPedido>();
+	}
+	
 
 	public void limpar() {
 		carrinho.limpar();
