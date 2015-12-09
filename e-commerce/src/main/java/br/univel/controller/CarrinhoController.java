@@ -21,8 +21,8 @@ public class CarrinhoController {
 
 	public void addProduto(Produto produto) {
 		ProdutoPedido pp = produtos.get(produto.getId());
-		
-		if ( pp == null){
+
+		if (pp == null) {
 			pp = new ProdutoPedido();
 			pp.setProduto(produto);
 			pp.setPreco(produto.getPreco());
@@ -30,19 +30,32 @@ public class CarrinhoController {
 		} else {
 			pp.addProduto();
 		}
-				
+
 		produtos.put(produto.getId(), pp);
 	}
-	
-	
+
+	public void finalizarPedido() {
+
+		Pedido pedido = new Pedido();
+		entityManager.persist(pedido);
+
+		for (ProdutoPedido produtoPedido : this.produtos.values()) {
+			produtoPedido.setProduto(entityManager.merge(produtoPedido
+					.getProduto()));
+			produtoPedido.setPedido(pedido);
+			entityManager.persist(produtoPedido);
+		}
+
+		limpaCarrinho();
+	}
+
 	public void removeProduto(Long id) {
 		produtos.remove(id);
 	}
-	
+
 	public void limpaCarrinho() {
 		produtos = new HashMap<Long, ProdutoPedido>();
 	}
-	
 
 	public void limpar() {
 		carrinho.limpar();
