@@ -19,8 +19,19 @@ public class CarrinhoController {
 	@Inject
 	private VendaEndpoint vendaEp;
 
-	public void adicionarProduto(@PathParam("id") long id) {
-		Produto p = pe.findById(id).readEntity(Produto.class);
+	public void addProduto(Produto produto) {
+		ProdutoPedido pp = produtos.get(produto.getId());
+		
+		if ( pp == null){
+			pp = new ProdutoPedido();
+			pp.setProduto(produto);
+			pp.setPreco(produto.getPreco());
+			pp.addProduto();
+		} else {
+			pp.addProduto();
+		}
+				
+		produtos.put(produto.getId(), pp);
 	}
 
 	public void limpar() {
