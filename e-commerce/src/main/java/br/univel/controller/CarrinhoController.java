@@ -1,7 +1,8 @@
 package br.univel.controller;
 
+import java.util.HashMap;
+
 import javax.inject.Inject;
-import javax.ws.rs.PathParam;
 
 import br.univel.model.Produto;
 import br.univel.model.Venda;
@@ -20,7 +21,8 @@ public class CarrinhoController {
 	private VendaEndpoint vendaEp;
 
 	public void addProduto(Produto produto) {
-		ProdutoPedido pp = produtos.get(produto.getId());
+		Object produtos;
+		ProdutoPedido pp = ((Object) produtos).get(produto.getId());
 
 		if (pp == null) {
 			pp = new ProdutoPedido();
