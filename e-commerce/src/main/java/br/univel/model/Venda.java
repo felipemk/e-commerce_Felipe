@@ -89,8 +89,9 @@ public class Venda implements Serializable
       return result;
    }
 
-   public void setProduto(Object produto) {
-	   // TODO Auto-generated method stub
-	
+   public void setProduto(Object produto)
+   {
+      // TODO Auto-generated method stub
+
    }
 }
